@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Warehouse</title>
+  </head>
+  <body>
+    {% if request.user.is_authenticated %}
+    <p>{{request.user}}</p>
+    <a href="{% url 'logout' %}">Log out</a>
+    {% else %}
+      <a href="{% url 'login' %}">Log in</a>
+
+    {% endif %}
+    <hr>
+    <h1>Items quantity</h1>
+    <a href="{% url 'create-record' %}">Create record</a>
+    <a href="{% url 'subir_archivo' %}">Bulk record</a>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+ 
+    <table class="table">
+        <thead>
+            <!-- item = models.CharField(max_length=200)
+    quantity = models.IntegerField()
+    createdDate = models.DateTimeField(auto_now_add=True)
+    LastModified = models.DateTimeField(auto_now_add=True)
+    WarehouseId =  models.CharField(max_length=200) -->
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">CreatedDate</th>
+            <th scope="col">LastModified</th>
+            <th scope="col">WarehouseId</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          
+          </tr>
+        </thead>
+        <tbody>
+            {% for warehouse in items %}
+          <tr>
+            
+            <!-- <th scope="row">1</th> -->
+            <td><a href="{% url 'itemID' warehouse.id  %}">{{warehouse.item}}</a></td>
+            <td>{{warehouse.quantity}}</td>
+            <td>{{warehouse.createdDate}}</td>
+            <td>{{warehouse.LastModified}}</td>
+            <td>{{warehouse.WarehouseId}}</td>
+            <td><a href="{% url 'edit' warehouse.id  %}">Edit</a></td>
+            <td><a href="{% url 'delete' warehouse.id  %}">Delete</a></td>
+        
+            <!-- <td>Otto</td>
+            <td>@mdo</td> -->
+          </tr>
+          {% empty %}
+        <h3>No hay elementos en esta lista</h3>
+          {% endfor %}
+         
+        </tbody>
+        
+      </table>
+
+</body>
+</html>

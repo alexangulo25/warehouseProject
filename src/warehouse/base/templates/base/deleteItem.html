@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete record</title>
+</head>
+<body>
+    <a href=""></a><a href="{% url 'warehouse_main' %}"> Home</a>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <p>Delete record "{{deleteView}}"</p>
+        <input type="submit" value="Delete">
+    </form>
+    
+</body>
+</html>
